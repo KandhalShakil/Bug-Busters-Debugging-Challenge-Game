@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bug Busters - Algorithm Debugging Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Monaco Editor (VS Code Editor) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+</head>
+<body>
+    <div class="nav-bar">
+        <div class="nav-content">
+            <h1 class="logo">🐛 BugBusters</h1>
+            <div class="nav-stats">
+                <span class="nav-stat">Score: <strong id="nav-score">0</strong></span>
+                <span class="nav-stat">Challenge: <strong id="nav-challenge">1/5</strong></span>
+                <span class="nav-stat">Streak: <strong id="nav-streak">0</strong></span>
+                <span class="nav-stat">Time: <strong id="nav-timer">0:00</strong></span>
+            </div>
+            <button id="start-btn" class="btn-start">Start Game</button>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="split-panel">
+            <!-- Left Panel - Problem Description -->
+            <div class="left-panel">
+                <div class="panel-tabs">
+                    <button class="tab-btn active" data-tab="description">
+                        <span>Description</span>
+                    </button>
+                    <button class="tab-btn" data-tab="submissions">
+                        <span>Submissions</span>
+                    </button>
+                </div>
+
+                <div class="tab-content-container">
+                    <!-- Description Tab -->
+                    <div id="description" class="tab-content active">
+                        <div class="problem-header">
+                            <div class="problem-title-section">
+                                <h2 id="problem-title">Loading Challenge...</h2>
+                                <div class="problem-meta">
+                                    <span id="difficulty-badge" class="badge badge-medium">Medium</span>
+                                    <span class="problem-stats">
+                                        <span class="stat-item">💯 Score: <strong id="challenge-score">0</strong></span>
+                                        <span class="stat-item">⏱️ <span id="challenge-timer">0:00</span></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="problem-content">
+                            <div class="problem-section">
+                                <p id="problem-description" class="problem-text">🐞 Click "Start Game" to hunt some bugs! (Wrong answers = Epic Roasts 🔥💀)</p>
+                            </div>
+
+                            <div class="problem-section">
+                                <h3>Examples</h3>
+                                <div id="test-cases-list" class="examples-list"></div>
+                            </div>
+
+                            <div class="problem-section">
+                                <h3>Bug Information</h3>
+                                <div class="constraints-box">
+                                    <p id="bug-hint">Your mission: Find the bug before it finds you 🕵️‍♂️</p>
+                                </div>
+                            </div>
+                            
+                            <div class="problem-section">
+                                <details class="hint-details">
+                                    <summary class="hint-summary">� Need a Hint? (Skill Issue Detected -10 pts)</summary>
+                                    <div class="hint-content" id="hint-display">Start the game to see hints for each challenge.</div>
+                                </details>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submissions Tab -->
+                    <div id="submissions" class="tab-content">
+                        <div class="submissions-content">
+                            <h3>Your Submissions</h3>
+                            <div id="submissions-list" class="submissions-list">
+                                <div class="empty-state">
+                                    <p>🎃 Nothing here yet... Just like my social life 😅</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resizer -->
+            <div class="resizer"></div>
+
+            <!-- Right Panel - Code Editor -->
+            <div class="right-panel">
+                <div class="editor-container">
+                    <div class="editor-header">
+                        <div class="editor-tabs">
+                            <button class="editor-tab active">
+                                <span class="tab-icon">🐍</span>
+                                <span>Python3</span>
+                            </button>
+                        </div>
+                        <div class="editor-actions">
+                            <button id="reset-code-btn" class="btn-icon" title="Reset Code">
+                                <span>↺</span>
+                            </button>
+                            <button id="copy-buggy-btn" class="btn-icon" title="Copy Buggy Code">
+                                <span>📋</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="monaco-editor" class="monaco-editor-container"></div>
+                </div>
+
+                <div class="console-container">
+                    <div class="console-tabs">
+                        <button class="console-tab active" data-console="testcase">
+                            <span>Testcase</span>
+                        </button>
+                        <button class="console-tab" data-console="result">
+                            <span>Test Result</span>
+                        </button>
+                    </div>
+
+                    <div class="console-content">
+                        <div id="testcase-panel" class="console-panel active">
+                            <div class="testcase-input">
+                                <label>Case <span id="current-case">1</span></label>
+                                <div id="testcase-display" class="testcase-display">
+                                    <div class="testcase-item">🤔 Hit 'Run' to see what breaks! </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="result-panel" class="console-panel">
+                            <div id="results-body" class="results-display">
+                                <div class="empty-state">
+                                    <p>🎮 Run your code and pray 🙏</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-bar">
+                    <div class="action-left">
+                        <button id="run-tests-btn" class="btn btn-run">
+                            <span>▶</span>
+                            <span>Run</span>
+                        </button>
+                        <button id="submit-solution-btn" class="btn btn-submit">
+                            <span>Submit</span>
+                        </button>
+                    </div>
+                    <div class="action-right">
+                        <button id="hint-btn" class="btn btn-hint-action">💡 Hint</button>
+                        <button id="skip-challenge-btn" class="btn btn-skip">Skip</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="game-over-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2 id="game-over-title">🎉 GG! You're Built Different!</h2>
+            <div class="final-stats">
+                <div class="stat-row">
+                    <span>Final Score:</span>
+                    <strong id="final-score">0</strong>
+                </div>
+                <div class="stat-row">
+                    <span>Bugs Squashed:</span>
+                    <strong id="final-bugs">0</strong>
+                </div>
+                <div class="stat-row">
+                    <span>Best Streak:</span>
+                    <strong id="final-streak">0</strong>
+                </div>
+                <div class="stat-row">
+                    <span>Accuracy:</span>
+                    <strong id="final-accuracy">0%</strong>
+                </div>
+                <div class="stat-row">
+                    <span>Total Time:</span>
+                    <strong id="final-time">0:00</strong>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="play-again-btn" class="btn btn-primary">🔄 Run It Back</button>
+                <button id="view-stats-btn" class="btn btn-secondary">📊 Check Stats</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Next Challenge Transition -->
+    <div id="next-challenge-modal" class="modal" style="display: none;">
+        <div class="modal-content transition-modal">
+            <div class="transition-icon" id="transition-icon">✅</div>
+            <h3 id="transition-title">Correct!</h3>
+            <p id="transition-message">Great job fixing the bug!</p>
+            <div class="transition-stats">
+                <span>+<span id="points-earned">75</span> points</span>
+                <span>Time: <span id="time-taken">00:45</span></span>
+            </div>
+            <button id="next-challenge-btn" class="btn btn-primary">Next Challenge →</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
