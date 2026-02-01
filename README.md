@@ -1,53 +1,260 @@
-<<<<<<< HEAD
-# 🐛 Bug Busters - Debugging Challenge Game
+# 🐛 Bug Busters - Comedy Debugging Challenge Game
 
-An educational debugging game where you find and fix bugs in algorithm implementations from your DAA (Design and Analysis of Algorithms) course!
+> **"Bhai Kya Kar Diya Tune? 😭"** - Get roasted in Hinglish when your code fails!
 
-## 🎮 Game Features
+A hilarious LeetCode-style algorithm debugging game that roasts you with **32 epic Hinglish memes and GIFs** when you submit wrong code! Learn algorithms while laughing at your mistakes! 🔥😂
+
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/KandhalShakil/Bug-Busters-Debugging-Challenge-Game)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-success?logo=vercel)](https://github.com/KandhalShakil/Bug-Busters-Debugging-Challenge-Game)
+
+## ✨ What Makes This Special?
+
+### 🎭 **Comedy & Roasts**
+- **32 Hilarious Hinglish Roast Messages** 😂
+- **Animated Meme GIFs** for every wrong answer 🎬
+- **Epic Success Messages** when you get it right 🏆
+- **Desi Vibes** with phrases like "Abe Saale!", "Sharma Ji Ka Beta Dekh!", "Arre Ram Ram!"
+
+### 🎮 **Professional LeetCode-Style UI**
+- **Monaco Editor** (VS Code editor) for code editing
+- **Dark Theme** with modern design
+- **Split Panel Layout** with resizable sections
+- **Tab Navigation** for Description, Submissions
+- **Real-time Test Results** with pass/fail indicators
+
+### 🧠 **Algorithm Challenges**
+- **5 Algorithm Problems** covering:
+  - Binary Search
+  - Merge Sort
+  - Quick Sort
+  - Fibonacci Dynamic Programming
+  - Dijkstra's Shortest Path
+- **Multiple Test Cases** for each problem
+- **Detailed Explanations** for every bug
+
+## 🚀 Features
 
 ### Core Gameplay
-- **10 Algorithm Challenges** covering major DAA topics
-- **Find & Fix Bugs** in code implementations
-- **Three Difficulty Levels**: Easy, Medium, and Hard
-- **Hint System** - Get help when stuck (costs 10 points)
-- **Streak System** - Build consecutive correct answers
-- **Real-time Feedback** - Learn from your mistakes
+- ⚡ **Live Code Editing** with Monaco Editor (VS Code)
+- 🎯 **Find & Fix Bugs** in algorithm implementations
+- 💯 **Scoring System** with points and streaks
+- 💡 **Hint System** (costs 10 points - "Skill Issue Detected!")
+- ⏱️ **Timer** tracks your solving speed
+- 📊 **Stats Tracking** - Score, streak, accuracy, time
 
-### Covered Algorithms
-1. 🔍 **Binary Search** - Array searching
-2. 🔀 **Merge Sort** - Divide and conquer sorting
-3. ⚡ **Quick Sort** - Partition-based sorting
-4. 🔢 **Fibonacci (DP)** - Dynamic programming with memoization
-5. 🗺️ **Dijkstra's Algorithm** - Shortest path finding
-6. 🌲 **Depth-First Search** - Graph traversal
-7. 📊 **Breadth-First Search** - Level-order traversal
-8. 💰 **Knapsack Problem** - Dynamic programming optimization
-9. 🗼 **Tower of Hanoi** - Recursive problem solving
-10. 📝 **Longest Common Subsequence** - String DP algorithms
+### Comedy Features
+- 🔥 **32 Roast Messages** in Hinglish
+- 😂 **Animated GIF Memes** from Giphy
+- 🎪 **Random Roasts** every time you're wrong
+- ✅ **Epic Success Messages** when correct
+- 🏃 **Funny Skip Messages**
+- 💀 **Performance-Based Game Over** titles
 
-### Scoring System
-- **Easy Bugs**: 50 points (75 without hints)
-- **Medium Bugs**: 75 points (100 without hints)
-- **Hard Bugs**: 100 points (125 without hints)
-- **Hints**: -10 points
+### Sample Roasts
+```
+"Beta Maafi Maango! 😭"
+"Python snake bhi tera code dekh ke dar gaya"
+
+"Sharma Ji Ka Beta Dekh! 👦"
+"Sharma ji ka beta toh pehli baar mein hi solve kar leta"
+
+"Abe Saale! 😠"
+"Tera code toh production mein jaane se pehle hi mar gaya"
+
+"Chacha Vidhayak Hain Humare! 🎩"
+"Lekin code toh fix nahi kar sakte na?"
+```
+
+## 🎯 How to Play
+
+1. **Start Game** - Click "Start Game" button (get epic alert! 🔥)
+2. **Read Problem** - Understand the buggy algorithm
+3. **Fix Code** - Edit code in Monaco editor
+4. **Run Tests** - See which test cases pass/fail
+5. **Submit** - Get roasted 💀 or praised 🏆
+6. **Next Challenge** - Move to next problem
+
+### Controls
+- **▶️ Run** - Test your code
+- **✅ Submit** - Submit solution
+- **💡 Hint** - Get help (-10 points)
+- **⏭️ Skip** - Skip challenge
+- **🔄 Reset** - Reset to buggy code
+
+## 📸 Screenshots
+
+### Success Screen
+```
+🎉 Absolute Legend! 🎯
+✅ Clean code with explanation
++75 points | Time: 00:45
+```
+
+### Roast Screen with GIF
+```
+💀 [FUNNY GIF MEME]
+
+Beta Maafi Maango! 😭
+Python snake bhi tera code dekh ke dar gaya
+
+━━━━━━━━━━━━━━━━━━
+
+The bug is in line 3. 'right' should be...
+-20 points | Try Again!
+```
+
+## 🛠️ Tech Stack
+
+- **HTML5** - Structure
+- **CSS3** - Dark theme styling (LeetCode-inspired)
+- **JavaScript ES6** - Game logic & roasting engine
+- **Monaco Editor** - VS Code editor integration
+- **Giphy API** - Animated meme GIFs
+
+## 📦 Installation & Setup
+
+### Quick Start (Local)
+```bash
+# Clone the repository
+git clone https://github.com/KandhalShakil/Bug-Busters-Debugging-Challenge-Game.git
+
+# Navigate to folder
+cd Bug-Busters-Debugging-Challenge-Game
+
+# Open in browser
+# Just open index.html in any modern browser!
+```
+
+### No Build Required! 
+This is a pure frontend game - just open `index.html` and start playing!
+
+## 🎓 Educational Value
+
+### Learn While Laughing
+- **Algorithm Debugging** - Practice finding common bugs
+- **Code Analysis** - Read and understand algorithm implementations
+- **Problem Solving** - Test-driven debugging approach
+- **Time Management** - Speed bonuses for fast solutions
+
+### Algorithms Covered
+1. **Binary Search** - Off-by-one errors
+2. **Merge Sort** - Index manipulation bugs
+3. **Quick Sort** - Partition logic errors
+4. **Fibonacci DP** - Memoization mistakes
+5. **Dijkstra** - Priority queue bugs
+
+## 🏆 Scoring System
+
+### Points
+- **Easy**: 50 base points (+25 without hint)
+- **Medium**: 75 base points (+25 without hint)
+- **Hard**: 100 base points (+25 without hint)
+- **Speed Bonus**: +10 points (< 60 seconds)
+- **Hint Penalty**: -10 points
 - **Wrong Answer**: -20 points
-- **Streak Bonus**: Track consecutive correct answers
 
-## 🚀 How to Play
+### Performance Ratings
+- **100% Accuracy**: "🏆 PERFECT! Absolute Gigachad Energy! 💪"
+- **80%+**: "🔥 Sheesh! Clean Run! 😎"
+- **60%+**: "👍 Not Bad! Mid Tier Vibes 🎯"
+- **40%+**: "😅 We Take Those... I Guess? 🤷"
+- **<40%**: "💀 Bruh... That Was Rough 😭"
 
-1. Open [index.html](index.html) in your browser
-2. Click **Start New Game** to begin
-3. Read the buggy code carefully
-4. Identify the bug and type/paste the corrected code
-5. Click **Submit Answer** to check your solution
-6. Use **Get Hint** if you're stuck
-7. Move to the next challenge with **Next Challenge**
+## 🎨 UI/UX Features
 
-## 🎯 Game Modes
+### Professional Design
+- **LeetCode-Inspired Layout** - Split panels, dark theme
+- **Monaco Editor** - Same editor as VS Code
+- **Resizable Panels** - Drag to adjust
+- **Smooth Animations** - Bounce effects, transitions
+- **Console Tabs** - Test cases & Results
+- **Responsive Design** - Works on all screens
 
-### Standard Mode (Current)
-- 10 randomized challenges from all topics
-- Mixed difficulty levels
+### Dark Theme Colors
+- Background: `#1a1a1a`
+- Primary Text: `#eff1f3`
+- Accent Green: `#00d9ff`
+- Success: `#00d9ff`
+- Error: `#ef4444`
+
+## 🤝 Contributing
+
+Want to add more roasts or algorithms? Contributions welcome!
+
+```bash
+# Fork the repository
+# Create your feature branch
+git checkout -b feature/more-roasts
+
+# Add your changes
+# Commit your changes
+git commit -m "Add: 10 new Hinglish roasts"
+
+# Push to the branch
+git push origin feature/more-roasts
+
+# Open a Pull Request
+```
+
+### Ideas for Contribution
+- [ ] Add more algorithm challenges
+- [ ] More Hinglish roasts and GIFs
+- [ ] Difficulty levels (Easy/Medium/Hard filters)
+- [ ] Leaderboard system
+- [ ] Sound effects for roasts
+- [ ] Share roast feature (social media)
+- [ ] Multiple language support (Hindi, English, Hinglish toggle)
+
+## 📝 File Structure
+
+```
+Bug-Busters-Debugging-Challenge-Game/
+│
+├── index.html          # Main game interface with Monaco editor
+├── style.css           # Dark theme LeetCode-style CSS
+├── game.js            # Game logic, roasts, and meme GIFs (32 roasts!)
+└── README.md          # This file
+```
+
+## 🐛 Known Issues
+
+None! The game is fully functional. Report issues on GitHub if you find any.
+
+## 📜 License
+
+MIT License - Feel free to use, modify, and distribute!
+
+## 👨‍💻 Author
+
+**Kandhal Shakil Gafarbhai**
+- GitHub: [@KandhalShakil](https://github.com/KandhalShakil)
+- Repository: [Bug Busters Game](https://github.com/KandhalShakil/Bug-Busters-Debugging-Challenge-Game)
+
+## 🙏 Acknowledgments
+
+- **Monaco Editor** - VS Code editor
+- **Giphy** - Animated meme GIFs
+- **LeetCode** - UI/UX inspiration
+- **Hinglish Culture** - For the epic roasts! 😂
+
+## 🎯 Future Enhancements
+
+- [ ] Backend for user authentication
+- [ ] Global leaderboard
+- [ ] Custom challenge creator
+- [ ] Multiplayer mode
+- [ ] Achievement badges
+- [ ] Code difficulty analyzer
+- [ ] Share your roast on Twitter/X
+- [ ] Mobile app version
+
+---
+
+**Made with 💀 and 🔥 by Shakil**
+
+**"Tera code dekh ke AI bhi confused ho gaya!" 🤖😂**
+
+*Star ⭐ this repo if you got roasted and laughed!*
 - Learn while you play!
 
 ## 📋 Common Bug Types
@@ -178,210 +385,3 @@ Potential additions:
 ---
 
 **Learn algorithms while having fun! Start debugging now! 🐛🔍**
-=======
-# Algorithm Performance Analyzer
-
-A comprehensive web-based debugging challenge game designed to help students master algorithm debugging skills through interactive Python challenges.
-
-## 🎯 Overview
-
-The Algorithm Performance Analyzer is an educational game that presents students with buggy Python algorithm implementations across multiple categories. Players must identify and fix bugs to advance through progressively challenging levels while earning points and maintaining lives.
-
-## 🚀 Features
-
-### 🐍 Python-Focused Learning
-- **Pure Python Challenges**: All algorithm implementations use Python syntax and conventions
-- **Real-World Bugs**: Common programming errors that students encounter in practice
-- **Educational Hints**: Contextual hints to guide learning without giving away solutions
-
-### 🎮 Gamification Elements
-- **Scoring System**: Earn points for correct solutions (150-600 points per challenge)
-- **Lives System**: 3 lives per game session with game over mechanics
-- **Progressive Difficulty**: Easy → Medium → Hard challenges within each category
-- **Hint System**: Strategic hint usage with point deduction (25 points)
-
-### 📚 Algorithm Categories
-
-1. **🔄 Sorting Algorithms** (6 challenges)
-   - Sequential Search, Bubble Sort, Selection Sort, Insertion Sort, Merge Sort
-   
-2. **🔍 Searching Algorithms** (1 challenge)
-   - Binary Search with boundary condition bugs
-   
-3. **🌐 Graph Algorithms** (3 challenges)
-   - BFS (Breadth-First Search), DFS (Depth-First Search), Dijkstra's Algorithm
-   
-4. **💰 Greedy Algorithms** (2 challenges)
-   - Activity Selection, Fractional Knapsack
-   
-5. **🔄 Dynamic Programming** (3 challenges)
-   - Fibonacci with Memoization, Longest Common Subsequence, 0/1 Knapsack
-   
-6. **🔙 Backtracking** (1 challenge)
-   - N-Queens Problem with solution storage bugs
-   
-7. **🌳 Branch & Bound** (1 challenge)
-   - 0/1 Knapsack optimization with bound calculation errors
-   
-8. **🔤 String Matching** (2 challenges)
-   - Naive String Matching, KMP Algorithm with LPS array bugs
-
-## 🛠️ Technology Stack
-
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Styling**: Modern CSS with Flexbox/Grid, Inter font family
-- **Design**: Responsive design with glassmorphism effects
-- **Icons**: Emoji-based UI elements and favicon
-
-## 📁 Project Structure
-
-```
-Algorithm-Performance-Analyzer/
-├── index.html          # Main HTML structure
-├── script.js           # Game logic and challenge data
-├── styles.css          # Modern CSS styling
-└── README.md           # Project documentation
-```
-
-## 🎯 Learning Objectives
-
-Students will learn to:
-- **Identify Common Bugs**: Recognize typical programming errors in algorithms
-- **Debug Systematically**: Develop structured debugging approaches
-- **Understand Algorithm Logic**: Grasp the core logic behind classic algorithms
-- **Optimize Code**: Learn about algorithm efficiency and optimization
-- **Problem-Solving Skills**: Enhance analytical thinking through guided challenges
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Modern web browser (Chrome, Firefox, Safari, Edge)
-- No additional installations required
-
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/KandhalShakil/Algorithm-Performance-Analyzer.git
-   ```
-
-2. Navigate to the project directory:
-   ```bash
-   cd Algorithm-Performance-Analyzer
-   ```
-
-3. Open `index.html` in your web browser:
-   ```bash
-   # On Windows
-   start index.html
-   
-   # On macOS
-   open index.html
-   
-   # On Linux
-   xdg-open index.html
-   ```
-
-### Usage
-1. **Select Category**: Choose an algorithm category from the dropdown
-2. **Read Challenge**: Understand the bug description and examine the code
-3. **Fix the Bug**: Edit the code to resolve the identified issue
-4. **Check Solution**: Submit your fix and receive immediate feedback
-5. **Use Hints Wisely**: Get help when needed (costs 25 points)
-6. **Progress Through Levels**: Complete challenges to unlock harder ones
-
-## 🎮 Game Mechanics
-
-### Scoring System
-- **Correct Solution**: +150 to +600 points (based on difficulty)
-- **Hint Usage**: -25 points per hint
-- **Hint Restriction**: Must have points to use hints
-
-### Lives System
-- **Starting Lives**: 3 lives per game
-- **Life Loss**: Incorrect solution costs 1 life
-- **Game Over**: When all lives are lost
-- **Restart**: Full game reset available
-
-### Challenge Progression
-- **Linear Progression**: Complete current challenge to unlock next
-- **Category Switching**: Switch between algorithm categories anytime
-- **Difficulty Scaling**: Challenges get progressively harder within categories
-
-## 🎨 UI/UX Features
-
-- **Modern Design**: Clean, professional interface with Inter font
-- **Responsive Layout**: Works on desktop, tablet, and mobile devices
-- **Visual Feedback**: Color-coded success/error messages
-- **Code Editor**: Syntax-highlighted textarea for code editing
-- **Progress Tracking**: Real-time score, level, and lives display
-
-## 🔧 Technical Implementation
-
-### Code Normalization
-- Whitespace-agnostic comparison for solution validation
-- Flexible code formatting acceptance
-- Robust string matching algorithms
-
-### Challenge Structure
-```javascript
-{
-    title: "Challenge Name",
-    description: "Bug description",
-    filename: "file.py",
-    buggyCode: "// Buggy implementation",
-    fixedCode: "// Correct implementation", 
-    hint: "Helpful guidance",
-    points: 300
-}
-```
-
-### Event Handling
-- Keyboard shortcuts (Ctrl+Enter for quick submission)
-- Category switching with state management
-- Dynamic UI updates based on game state
-
-## 🤝 Contributing
-
-Contributions are welcome! Here's how you can help:
-
-1. **Fork the repository**
-2. **Create a feature branch**: `git checkout -b feature/new-challenge`
-3. **Add new challenges** or improve existing ones
-4. **Test thoroughly** to ensure bugs are educational and fixable
-5. **Submit a pull request** with detailed description
-
-### Adding New Challenges
-1. Follow the existing challenge structure in `script.js`
-2. Ensure bugs are educational and represent common mistakes
-3. Provide clear, helpful hints
-4. Test both buggy and fixed code implementations
-5. Assign appropriate point values based on difficulty
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 Author
-
-**Kandhal Shakil**
-- GitHub: [@KandhalShakil](https://github.com/KandhalShakil)
-- Repository: [Algorithm-Performance-Analyzer](https://github.com/KandhalShakil/Algorithm-Performance-Analyzer)
-
-## 🙏 Acknowledgments
-
-- Inspired by the need for interactive algorithm learning tools
-- Built for educational purposes to enhance debugging skills
-- Designed with modern web development best practices
-
-## 📊 Project Stats
-
-- **Total Challenges**: 19 algorithm debugging challenges
-- **Categories**: 8 different algorithm categories
-- **Difficulty Levels**: Easy, Medium, Hard progression
-- **Point Range**: 150-600 points per challenge
-- **Languages**: Python-focused implementations
-
----
-
-**Happy Debugging! 🐛→✅**
->>>>>>> fcb1cf1949ed4cb881dc687e22c0c29182f6dfe6
