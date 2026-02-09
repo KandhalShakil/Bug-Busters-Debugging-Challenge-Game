@@ -3,216 +3,1059 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bug Busters - Algorithm Debugging Platform</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Monaco Editor (VS Code Editor) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js"></script>
+    <title>Bug Busters - Debugging Challenge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item .label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .stat-item .value {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+
+        .game-area {
+            padding: 40px;
+        }
+
+        .challenge-info {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 5px solid #667eea;
+        }
+
+        .challenge-info h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+
+        .challenge-info p {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .test-case {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px dashed #667eea;
+            font-family: 'Courier New', monospace;
+            color: #333;
+        }
+
+        .code-section {
+            margin-bottom: 25px;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .code-header {
+            background: #667eea;
+            color: white;
+            padding: 12px 20px;
+            font-weight: bold;
+        }
+
+        #code-display {
+            width: 100%;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: auto;
+            white-space: pre;
+            margin: 0;
+        }
+
+        .mcq-section {
+            margin-bottom: 25px;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .mcq-section h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .mcq-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .mcq-option {
+            background: white;
+            padding: 18px 20px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .mcq-option:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mcq-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .mcq-option label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 1.05em;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .mcq-option input[type="radio"]:checked ~ label,
+        .mcq-option:has(input[type="radio"]:checked) {
+            border-color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .feedback {
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s ease;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feedback.success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            animation: celebrate 0.6s ease;
+        }
+
+        .feedback.error {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            animation: shake 0.5s ease;
+        }
+
+        .feedback.info {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .stats {
+                gap: 20px;
+            }
+            
+            .game-area {
+                padding: 20px;
+            }
+            
+            #code-display {
+                font-size: 12px;
+                padding: 15px;
+            }
+            
+            .mcq-option {
+                padding: 15px;
+            }
+            
+            .mcq-option label {
+                font-size: 0.95em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="nav-bar">
-        <div class="nav-content">
-            <h1 class="logo">🐛 BugBusters</h1>
-            <div class="nav-stats">
-                <span class="nav-stat">Score: <strong id="nav-score">0</strong></span>
-                <span class="nav-stat">Challenge: <strong id="nav-challenge">1/5</strong></span>
-                <span class="nav-stat">Streak: <strong id="nav-streak">0</strong></span>
-                <span class="nav-stat">Time: <strong id="nav-timer">0:00</strong></span>
+    <div class="container">
+        <header>
+            <h1>🐛 BUG BUSTERS DEBUGGING CHALLENGE</h1>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="label">Score:</span>
+                    <span class="value" id="score">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">Challenge:</span>
+                    <span class="value" id="challenge">1/20</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">Time:</span>
+                    <span class="value" id="timer">0:00</span>
+                </div>
             </div>
-            <button id="start-btn" class="btn-start">Start Game</button>
+        </header>
+
+        <div class="game-area">
+            <div class="challenge-info">
+                <h2 id="algorithm-name">Click Start to Begin</h2>
+                <p id="description">Find and fix the bugs in classic algorithms!</p>
+                <div class="test-case" id="test-case">
+                    <strong>Test Case:</strong> Will appear when you start
+                </div>
+            </div>
+
+            <div class="code-section">
+                <div class="code-header">
+                    <span>Buggy Code - Find the Bug!</span>
+                </div>
+                <pre id="code-display"><code id="code-content">// Click 'Start Challenge' to begin!</code></pre>
+            </div>
+
+            <div class="mcq-section" id="mcq-section">
+                <h3>What is the bug in this code?</h3>
+                <div class="mcq-options" id="mcq-options">
+                    <!-- MCQ options will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="start-btn" class="btn btn-primary">Start Challenge</button>
+                <button id="submit-btn" class="btn btn-success" disabled>Submit Answer</button>
+                <button id="next-btn" class="btn btn-info" style="display:none;">Next Challenge</button>
+                <button id="hint-btn" class="btn btn-warning" disabled>Get Hint (-5 pts)</button>
+            </div>
+
+            <div class="feedback" id="feedback"></div>
         </div>
     </div>
 
-    <div class="main-container">
-        <div class="split-panel">
-            <!-- Left Panel - Problem Description -->
-            <div class="left-panel">
-                <div class="panel-tabs">
-                    <button class="tab-btn active" data-tab="description">
-                        <span>Description</span>
-                    </button>
-                    <button class="tab-btn" data-tab="submissions">
-                        <span>Submissions</span>
-                    </button>
-                </div>
+    <script>
+// Bug Busters Debugging Challenge Game
+class BugBustersGame {
+    constructor() {
+        this.score = 0;
+        this.currentChallenge = 0;
+        this.timeElapsed = 0;
+        this.timerInterval = null;
+        this.totalChallenges = 20;
+        
+        // Algorithm challenges with bugs
+        this.challenges = [
+            {
+                name: "Binary Search",
+                description: "Find the target in a sorted array. There's a bug causing incorrect behavior!",
+                buggyCode: `function binarySearch(arr, target) {
+    let left = 0;
+    let right = arr.length; 
+    
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+        
+        if (arr[mid] === target) {
+            return mid;
+        } else if (arr[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return -1;
+}`,
+                testCase: "Input: arr=[1,3,5,7,9], target=7\\nExpected Output: 3",
+                options: [
+                    "A) The mid calculation can cause integer overflow",
+                    "B) The initial right value should be arr.length - 1",
+                    "C) The condition left <= right should be left < right",
+                    "D) The update left = mid + 1 should be left = mid"
+                ],
+                correctAnswer: 1,
+                hint: "Check the initial value of 'right' variable. Should it include the last valid index?"
+            },
+            {
+                name: "Bubble Sort",
+                description: "Sort array in ascending order. The output is not what we expect!",
+                buggyCode: `function bubbleSort(arr) {
+    let n = arr.length;
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n - i - 1; j++) {
+            if (arr[j] < arr[j + 1]) { 
+                let temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+    return arr;
+}`,
+                testCase: "Input: arr=[64,34,25,12,22]\\nExpected Output: [12,22,25,34,64]",
+                options: [
+                    "A) The outer loop should use i <= n instead of i < n",
+                    "B) The comparison arr[j] < arr[j + 1] should be arr[j] > arr[j + 1]",
+                    "C) The inner loop should start from j = 1 instead of j = 0",
+                    "D) The temp variable should be initialized outside the loops"
+                ],
+                correctAnswer: 1,
+                hint: "Look at the comparison operator. For ascending sort, when should we swap?"
+            },
+            {
+                name: "Fibonacci Sequence",
+                description: "Generate nth Fibonacci number. The result is off by one!",
+                buggyCode: `function fibonacci(n) {
+    if (n <= 1) return n;
+    
+    let a = 0, b = 1;
+    for (let i = 2; i <= n; i++) { 
+        let temp = a + b;
+        a = b;
+        b = temp;
+    }
+    return b;
+}`,
+                testCase: "Input: n=7\\nExpected Output: 8 (Sequence: 0,1,1,2,3,5,8,13...)",
+                options: [
+                    "A) The base case should be if (n < 1) return n",
+                    "B) The loop condition i <= n should be i < n",
+                    "C) Variables a and b should be initialized as a = 1, b = 0",
+                    "D) The return statement should return a instead of b"
+                ],
+                correctAnswer: 1,
+                hint: "Check the loop condition. How many iterations do we need for the nth number?"
+            },
+            {
+                name: "Linear Search",
+                description: "Find element in unsorted array. It always returns -1!",
+                buggyCode: `function linearSearch(arr, target) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === target) {
+            i; 
+        }
+    }
+    return -1;
+}`,
+                testCase: "Input: arr=[10,23,45,70,11], target=70\\nExpected Output: 3",
+                options: [
+                    "A) The loop should use i <= arr.length instead of i < arr.length",
+                    "B) The statement 'i;' should be 'return i;'",
+                    "C) The comparison should use == instead of ===",
+                    "D) The return -1 should be inside the loop"
+                ],
+                correctAnswer: 1,
+                hint: "When we find the target, what should we do with the index?"
+            },
+            {
+                name: "Factorial Calculation",
+                description: "Calculate factorial recursively. Crashes on certain inputs!",
+buggyCode: `function factorial(n) {
+    if (n === 1) return 1; 
+    return n * factorial(n - 1);
+}`,
+                testCase: "Input: n=5\\nExpected Output: 120 (5*4*3*2*1)",
+                options: [
+                    "A) The recursive call should be factorial(n + 1)",
+                    "B) The base case condition should be n <= 1 instead of n === 1",
+                    "C) The return statement should be n + factorial(n - 1)",
+                    "D) The function should use a loop instead of recursion"
+                ],
+                correctAnswer: 1,
+                hint: "What happens when n=0? Check your base case condition."
+            },
+            {
+                name: "Array Maximum",
+                description: "Find maximum value in array. Fails with negative numbers!",
+                buggyCode: `function findMax(arr) {
+    let max = 0; 
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}`,
+                testCase: "Input: arr=[-10,-5,-20,-1]\\nExpected Output: -1",
+                options: [
+                    "A) The loop should start from i = 1 and max = arr[0]",
+                    "B) The comparison should be arr[i] >= max instead of arr[i] > max",
+                    "C) The return statement should return max * -1",
+                    "D) The max initialization should be inside the loop"
+                ],
+                correctAnswer: 0,
+                hint: "What if all numbers are negative? How should we initialize max?"
+            },
+            {
+                name: "Quick Sort Partition",
+                description: "Partition array for Quick Sort. The pivot placement is incorrect!",
+                buggyCode: `function partition(arr, low, high) {
+    let pivot = arr[high];
+    let i = low - 1;
+    
+    for (let j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+    }
+    [arr[i], arr[high]] = [arr[high], arr[i]];
+    return i;
+}`,
+                testCase: "Input: arr=[10,80,30,90,40], pivot at index 4\\nExpected: Partition around 40",
+                options: [
+                    "A) Should swap arr[i+1] and arr[high], not arr[i] and arr[high]",
+                    "B) The loop should use j <= high instead of j < high",
+                    "C) The pivot should be arr[low] instead of arr[high]",
+                    "D) The comparison should be arr[j] < pivot instead of arr[j] <= pivot"
+                ],
+                correctAnswer: 0,
+                hint: "After the loop, variable i points to the last element less than pivot. Where should pivot go?"
+            },
+            {
+                name: "Merge Two Sorted Arrays",
+                description: "Merge two sorted arrays. Some elements are being skipped!",
+                buggyCode: `function mergeSorted(arr1, arr2) {
+    let result = [];
+    let i = 0, j = 0;
+    
+    while (i < arr1.length && j < arr2.length) {
+        if (arr1[i] < arr2[j]) {
+            result.push(arr1[i]);
+            i++;
+        } else {
+            result.push(arr2[j]);
+            j++;
+        }
+    }
+    return result;
+}`,
+                testCase: "Input: arr1=[1,3,5], arr2=[2,4,6,8]\\nExpected: [1,2,3,4,5,6,8]",
+                options: [
+                    "A) Should use <= instead of < in the comparison",
+                    "B) Missing code to add remaining elements from arr1 and arr2",
+                    "C) The while loop condition should be i <= arr1.length",
+                    "D) Should use arr1[i] > arr2[j] instead of arr1[i] < arr2[j]"
+                ],
+                correctAnswer: 1,
+                hint: "What happens when one array is exhausted but the other still has elements?"
+            },
+            {
+                name: "Reverse String",
+                description: "Reverse a string using two pointers. It's not working!",
+                buggyCode: `function reverseString(str) {
+    let arr = str.split('');
+    let left = 0, right = arr.length - 1;
+    
+    while (left < right) {
+        [arr[left], arr[right]] = [arr[right], arr[left]];
+        left++;
+    }
+    return arr.join('');
+}`,
+                testCase: "Input: str='hello'\\nExpected Output: 'olleh'",
+                options: [
+                    "A) Should use left <= right instead of left < right",
+                    "B) Missing right-- to move right pointer backward",
+                    "C) Should increment both left and right together",
+                    "D) The swap syntax is incorrect"
+                ],
+                correctAnswer: 1,
+                hint: "You're moving the left pointer forward, but what about the right pointer?"
+            },
+            {
+                name: "Is Palindrome",
+                description: "Check if string is palindrome. Case sensitivity issue!",
+                buggyCode: `function isPalindrome(str) {
+    let left = 0, right = str.length - 1;
+    
+    while (left < right) {
+        if (str[left] !== str[right]) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+}`,
+                testCase: "Input: str='RaceCar'\\nExpected Output: true (case-insensitive)",
+                options: [
+                    "A) Should convert to lowercase: str[left].toLowerCase() !== str[right].toLowerCase()",
+                    "B) Should use left <= right instead of left < right",
+                    "C) Should return true inside the if statement",
+                    "D) Should start loop from left = 1"
+                ],
+                correctAnswer: 0,
+                hint: "Should 'A' and 'a' be considered the same in a palindrome check?"
+            },
+            {
+                name: "Two Sum Problem",
+                description: "Find two numbers that add up to target. Returning wrong indices!",
+                buggyCode: `function twoSum(arr, target) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length; j++) {
+            if (arr[i] + arr[j] === target) {
+                return [i, j];
+            }
+        }
+    }
+    return [];
+}`,
+                testCase: "Input: arr=[2,7,11,15], target=9\\nExpected: [0,1]",
+                options: [
+                    "A) Should start j loop from j = 1",
+                    "B) Should start j loop from j = i + 1 to avoid using same element twice",
+                    "C) Should use arr[i] - arr[j] instead of addition",
+                    "D) Should check if i !== j before returning"
+                ],
+                correctAnswer: 1,
+                hint: "We shouldn't use the same element twice. Where should j start relative to i?"
+            },
+            {
+                name: "Remove Duplicates",
+                description: "Remove duplicates from sorted array in-place. Logic error!",
+                buggyCode: `function removeDuplicates(arr) {
+    if (arr.length === 0) return 0;
+    
+    let i = 0;
+    for (let j = 1; j < arr.length; j++) {
+        if (arr[j] !== arr[i]) {
+            arr[i] = arr[j];
+            i++;
+        }
+    }
+    return i + 1;
+}`,
+                testCase: "Input: arr=[1,1,2,2,3]\\nExpected: First 3 elements should be [1,2,3]",
+                options: [
+                    "A) Should increment i before assignment: i++; arr[i] = arr[j];",
+                    "B) Should use arr[j] === arr[i] instead of !==",
+                    "C) Should start j from 0 instead of 1",
+                    "D) Should return i instead of i + 1"
+                ],
+                correctAnswer: 0,
+                hint: "We found a unique element at arr[j]. Where should it be placed in the array?"
+            },
+            {
+                name: "Selection Sort",
+                description: "Sort array using selection sort. Swap logic is broken!",
+                buggyCode: `function selectionSort(arr) {
+    for (let i = 0; i < arr.length - 1; i++) {
+        let minIdx = i;
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[minIdx]) {
+                minIdx = j;
+            }
+        }
+        [arr[i], arr[i]] = [arr[minIdx], arr[i]];
+    }
+    return arr;
+}`,
+                testCase: "Input: arr=[64,25,12,22,11]\\nExpected: [11,12,22,25,64]",
+                options: [
+                    "A) Should swap arr[i] with arr[minIdx]: [arr[i], arr[minIdx]] = [arr[minIdx], arr[i]]",
+                    "B) The inner loop should use j <= arr.length",
+                    "C) Should compare arr[j] > arr[minIdx] for ascending order",
+                    "D) Should initialize minIdx = 0 instead of minIdx = i"
+                ],
+                correctAnswer: 0,
+                hint: "Look at the swap statement carefully. Are we swapping arr[i] with itself?"
+            },
+            {
+                name: "Insertion Sort",
+                description: "Sort array with insertion sort. Inner loop condition is wrong!",
+                buggyCode: `function insertionSort(arr) {
+    for (let i = 1; i < arr.length; i++) {
+        let key = arr[i];
+        let j = i - 1;
+        
+        while (j > 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = key;
+    }
+    return arr;
+}`,
+                testCase: "Input: arr=[12,11,13,5,6]\\nExpected: [5,6,11,12,13]",
+                options: [
+                    "A) Should use j < arr.length in while condition",
+                    "B) Should use j >= 0 instead of j > 0 in while condition",
+                    "C) Should increment j instead of decrement",
+                    "D) Should compare arr[j] < key instead of arr[j] > key"
+                ],
+                correctAnswer: 1,
+                hint: "When j equals 0 and arr[0] > key, should we continue shifting or stop?"
+            },
+            {
+                name: "Count Occurrences",
+                description: "Count occurrences of target in array. Counter not updating!",
+                buggyCode: `function countOccurrences(arr, target) {
+    let count = 0;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === target) {
+            count;
+        }
+    }
+    return count;
+}`,
+                testCase: "Input: arr=[1,2,3,2,2,4], target=2\\nExpected: 3",
+                options: [
+                    "A) Should use count += arr[i] instead of just count",
+                    "B) Should write count++ or count = count + 1 to increment",
+                    "C) Should initialize count = 1 instead of count = 0",
+                    "D) Should use arr[i] == target with double equals"
+                ],
+                correctAnswer: 1,
+                hint: "Finding a match should increase the count. How do we increment a variable?"
+            },
+            {
+                name: "Array Sum",
+                description: "Calculate sum of array elements. Not accumulating properly!",
+                buggyCode: `function arraySum(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum = arr[i];
+    }
+    return sum;
+}`,
+                testCase: "Input: arr=[1,2,3,4,5]\\nExpected: 15",
+                options: [
+                    "A) Should use sum += arr[i] to accumulate values",
+                    "B) Should initialize sum = 1 instead of sum = 0",
+                    "C) Should return arr[i] instead of sum",
+                    "D) Should use sum = sum - arr[i] for subtraction"
+                ],
+                correctAnswer: 0,
+                hint: "We want to add each element to the running total, not replace it."
+            },
+            {
+                name: "Find Minimum",
+                description: "Find minimum value in array. Wrong initialization!",
+                buggyCode: `function findMin(arr) {
+    let min = 0;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+    }
+    return min;
+}`,
+                testCase: "Input: arr=[5,2,8,1,9]\\nExpected: 1",
+                options: [
+                    "A) Should use arr[i] > min in the comparison",
+                    "B) Should initialize min = arr[0] or min = Infinity",
+                    "C) Should start loop from i = 1",
+                    "D) Should return arr[0] instead of min"
+                ],
+                correctAnswer: 1,
+                hint: "If all array values are positive, will we ever update min from 0?"
+            },
+            {
+                name: "String Contains",
+                description: "Check if string contains substring. Return statement misplaced!",
+                buggyCode: `function contains(str, substr) {
+    for (let i = 0; i <= str.length - substr.length; i++) {
+        let match = true;
+        for (let j = 0; j < substr.length; j++) {
+            if (str[i + j] !== substr[j]) {
+                match = false;
+                break;
+            }
+        }
+        return match;
+    }
+    return false;
+}`,
+                testCase: "Input: str='hello world', substr='world'\\nExpected: true",
+                options: [
+                    "A) Should check match after inner loop: if (match) return true; continue outer loop",
+                    "B) Should use === instead of !== in comparison",
+                    "C) Should return false inside the if statement",
+                    "D) Should break from outer loop instead of inner loop"
+                ],
+                correctAnswer: 0,
+                hint: "Are we returning too early? Should we check if match is true after the inner loop completes?"
+            },
+            {
+                name: "Power Function",
+                description: "Calculate base^exponent recursively. Base case is wrong!",
+                buggyCode: `function power(base, exp) {
+    if (exp === 1) return base;
+    return base * power(base, exp - 1);
+}`,
+                testCase: "Input: base=2, exp=0\\nExpected: 1 (anything^0 = 1)",
+                options: [
+                    "A) Should check if (exp === 0) return 1; as the base case",
+                    "B) Should use exp + 1 instead of exp - 1",
+                    "C) Should return 0 when exp === 1",
+                    "D) Should multiply by exp instead of base"
+                ],
+                correctAnswer: 0,
+                hint: "What is any number raised to the power of 0? Is the current base case handling that?"
+            },
+            {
+                name: "Array Rotation",
+                description: "Rotate array right by k positions. Index calculation error!",
+                buggyCode: `function rotateArray(arr, k) {
+    let result = new Array(arr.length);
+    for (let i = 0; i < arr.length; i++) {
+        result[(i + k)] = arr[i];
+    }
+    return result;
+}`,
+                testCase: "Input: arr=[1,2,3,4,5], k=2\\nExpected: [4,5,1,2,3]",
+                options: [
+                    "A) Should use (i + k) % arr.length to wrap around indices",
+                    "B) Should use (i - k) instead of (i + k)",
+                    "C) Should iterate backwards: i = arr.length - 1 down to 0",
+                    "D) Should multiply by k: result[i * k] = arr[i]"
+                ],
+                correctAnswer: 0,
+                hint: "What happens when (i + k) exceeds array length? How do we wrap indices?"
+            }
+        ];
+        
+        this.initializeGame();
+    }
+    
+    initializeGame() {
+        this.scoreElement = document.getElementById('score');
+        this.challengeElement = document.getElementById('challenge');
+        this.timerElement = document.getElementById('timer');
+        this.algorithmName = document.getElementById('algorithm-name');
+        this.description = document.getElementById('description');
+        this.testCase = document.getElementById('test-case');
+        this.codeDisplay = document.getElementById('code-content');
+        this.mcqOptions = document.getElementById('mcq-options');
+        this.mcqSection = document.getElementById('mcq-section');
+        this.feedback = document.getElementById('feedback');
+        
+        this.startBtn = document.getElementById('start-btn');
+        this.submitBtn = document.getElementById('submit-btn');
+        this.nextBtn = document.getElementById('next-btn');
+        this.hintBtn = document.getElementById('hint-btn');
+        
+        this.startBtn.addEventListener('click', () => this.startGame());
+        this.submitBtn.addEventListener('click', () => this.checkAnswer());
+        this.nextBtn.addEventListener('click', () => this.nextChallenge());
+        this.hintBtn.addEventListener('click', () => this.showHint());
+        
+        this.codeDisplay.textContent = "// Click 'Start Challenge' to begin!";
+        this.hintBtn.disabled = true;
+        this.mcqSection.style.display = 'none';
+    }
+    
+    startGame() {
+        this.score = 0;
+        this.currentChallenge = 0;
+        this.timeElapsed = 0;
+        this.updateStats();
+        this.loadChallenge();
+        this.startTimer();
+        this.startBtn.disabled = true;
+        this.submitBtn.disabled = true;
+        this.hintBtn.disabled = false;
+        this.mcqSection.style.display = 'block';
+        this.feedback.textContent = '';
+        this.feedback.className = 'feedback';
+    }
+    
+    loadChallenge() {
+        if (this.currentChallenge >= this.totalChallenges) {
+            this.endGame();
+            return;
+        }
+        
+        const challenge = this.challenges[this.currentChallenge];
+        this.algorithmName.textContent = challenge.name;
+        this.description.textContent = challenge.description;
+        this.testCase.innerHTML = `<strong>Test Case:</strong><br>${challenge.testCase.replace(/\\n/g, '<br>')}`;
+        this.codeDisplay.textContent = challenge.buggyCode;
+        
+        const originalCorrectAnswer = challenge.options[challenge.correctAnswer];
+        const shuffledOptions = [...challenge.options];
+        
+        for (let i = shuffledOptions.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledOptions[i], shuffledOptions[j]] = [shuffledOptions[j], shuffledOptions[i]];
+        }
+        
+        const newCorrectAnswer = shuffledOptions.indexOf(originalCorrectAnswer);
+        
+        this.currentShuffledOptions = shuffledOptions;
+        this.currentCorrectAnswer = newCorrectAnswer;
+        
+        const labels = ['A', 'B', 'C', 'D'];
+        
+        this.mcqOptions.innerHTML = '';
+        shuffledOptions.forEach((option, index) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'mcq-option';
+            const optionText = option.substring(3);
+            optionDiv.innerHTML = `
+                <input type="radio" id="option${index}" name="mcq" value="${index}">
+                <label for="option${index}">${labels[index]}) ${optionText}</label>
+            `;
+            this.mcqOptions.appendChild(optionDiv);
+            
+            optionDiv.querySelector('input').addEventListener('change', () => {
+                this.submitBtn.disabled = false;
+            });
+        });
+        
+        this.nextBtn.style.display = 'none';
+        this.submitBtn.disabled = true;
+        this.feedback.textContent = '';
+        this.feedback.className = 'feedback';
+    }
+    
+    checkAnswer() {
+        const selectedOption = document.querySelector('input[name="mcq"]:checked');
+        
+        if (!selectedOption) {
+            this.feedback.textContent = '⚠️ Please select an answer!';
+            this.feedback.className = 'feedback error';
+            return;
+        }
+        
+        const selectedAnswer = parseInt(selectedOption.value);
+        
+        if (selectedAnswer === this.currentCorrectAnswer) {
+            this.handleCorrectAnswer();
+        } else {
+            this.handleWrongAnswer(selectedAnswer);
+        }
+    }
+    
+    handleCorrectAnswer() {
+        const points = 20;
+        this.score += points;
+        this.updateStats();
+        
+        this.feedback.textContent = `🎉 Correct! You found the bug! +${points} points`;
+        this.feedback.className = 'feedback success';
+        
+        this.submitBtn.disabled = true;
+        this.nextBtn.style.display = 'inline-block';
+        
+        document.querySelectorAll('input[name="mcq"]').forEach(input => input.disabled = true);
+        
+        const correctOption = document.querySelectorAll('.mcq-option')[this.currentCorrectAnswer];
+        correctOption.style.background = 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)';
+        correctOption.style.color = 'white';
+        
+        setTimeout(() => {
+            if (this.currentChallenge < this.totalChallenges - 1) {
+                this.nextChallenge();
+            } else {
+                this.endGame();
+            }
+        }, 2000);
+    }
+    
+    handleWrongAnswer(selectedAnswer) {
+        this.score = Math.max(0, this.score - 5);
+        this.updateStats();
+        
+        this.feedback.innerHTML = `
+            <div style="text-align: center;">
+                <div style="font-size: 1.2em; margin-bottom: 15px;">❌ Wrong Answer!</div>
+                <div style="margin-top: 10px; font-size: 0.9em; opacity: 0.9;">-5 points | Try again!</div>
+            </div>`;
+        this.feedback.className = 'feedback error';
+        
+        const wrongOption = document.querySelectorAll('.mcq-option')[selectedAnswer];
+        wrongOption.style.background = 'linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%)';
+        wrongOption.style.color = 'white';
+        
+        setTimeout(() => {
+            wrongOption.style.background = '';
+            wrongOption.style.color = '';
+            this.feedback.className = 'feedback';
+        }, 2000);
+    }
+    
+    showHint() {
+        const challenge = this.challenges[this.currentChallenge];
+        this.score = Math.max(0, this.score - 5);
+        this.updateStats();
+        
+        this.feedback.textContent = `💡 Hint: ${challenge.hint} (-5 points)`;
+        this.feedback.className = 'feedback info';
+    }
+    
+    nextChallenge() {
+        this.currentChallenge++;
+        this.updateStats();
+        this.loadChallenge();
+    }
+    
+    startTimer() {
+        this.timerInterval = setInterval(() => {
+            this.timeElapsed++;
+            this.updateTimer();
+        }, 1000);
+    }
+    
+    updateTimer() {
+        const minutes = Math.floor(this.timeElapsed / 60);
+        const seconds = this.timeElapsed % 60;
+        this.timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+    
+    updateStats() {
+        this.scoreElement.textContent = this.score;
+        this.challengeElement.textContent = `${this.currentChallenge + 1}/${this.totalChallenges}`;
+    }
+    
+    endGame() {
+        clearInterval(this.timerInterval);
+        
+        this.algorithmName.textContent = "Game Complete! 🎉";
+        this.description.textContent = `You've completed all challenges!`;
+        this.testCase.innerHTML = `<strong>Final Results:</strong><br>
+            Score: ${this.score} points<br>
+            Time: ${this.timerElement.textContent}<br>
+            Challenges Completed: ${this.totalChallenges}`;
+        
+        this.codeDisplay.textContent = "// Great job! Refresh the page to play again!";
+        this.mcqOptions.innerHTML = '';
+        this.submitBtn.disabled = true;
+        this.nextBtn.style.display = 'none';
+        this.hintBtn.disabled = true;
+        
+        this.feedback.textContent = `🏆 Final Score: ${this.score} points! Time: ${this.timerElement.textContent}`;
+        this.feedback.className = 'feedback success';
+    }
+}
 
-                <div class="tab-content-container">
-                    <!-- Description Tab -->
-                    <div id="description" class="tab-content active">
-                        <div class="problem-header">
-                            <div class="problem-title-section">
-                                <h2 id="problem-title">Loading Challenge...</h2>
-                                <div class="problem-meta">
-                                    <span id="difficulty-badge" class="badge badge-medium">Medium</span>
-                                    <span class="problem-stats">
-                                        <span class="stat-item">💯 Score: <strong id="challenge-score">0</strong></span>
-                                        <span class="stat-item">⏱️ <span id="challenge-timer">0:00</span></span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="problem-content">
-                            <div class="problem-section">
-                                <p id="problem-description" class="problem-text">🐞 Click "Start Game" to hunt some bugs! (Wrong answers = Epic Roasts 🔥💀)</p>
-                            </div>
-
-                            <div class="problem-section">
-                                <h3>Examples</h3>
-                                <div id="test-cases-list" class="examples-list"></div>
-                            </div>
-
-                            <div class="problem-section">
-                                <h3>Bug Information</h3>
-                                <div class="constraints-box">
-                                    <p id="bug-hint">Your mission: Find the bug before it finds you 🕵️‍♂️</p>
-                                </div>
-                            </div>
-                            
-                            <div class="problem-section">
-                                <details class="hint-details">
-                                    <summary class="hint-summary">� Need a Hint? (Skill Issue Detected -10 pts)</summary>
-                                    <div class="hint-content" id="hint-display">Start the game to see hints for each challenge.</div>
-                                </details>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Submissions Tab -->
-                    <div id="submissions" class="tab-content">
-                        <div class="submissions-content">
-                            <h3>Your Submissions</h3>
-                            <div id="submissions-list" class="submissions-list">
-                                <div class="empty-state">
-                                    <p>🎃 Nothing here yet... Just like my social life 😅</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Resizer -->
-            <div class="resizer"></div>
-
-            <!-- Right Panel - Code Editor -->
-            <div class="right-panel">
-                <div class="editor-container">
-                    <div class="editor-header">
-                        <div class="editor-tabs">
-                            <button class="editor-tab active">
-                                <span class="tab-icon">🐍</span>
-                                <span>Python3</span>
-                            </button>
-                        </div>
-                        <div class="editor-actions">
-                            <button id="reset-code-btn" class="btn-icon" title="Reset Code">
-                                <span>↺</span>
-                            </button>
-                            <button id="copy-buggy-btn" class="btn-icon" title="Copy Buggy Code">
-                                <span>📋</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div id="monaco-editor" class="monaco-editor-container"></div>
-                </div>
-
-                <div class="console-container">
-                    <div class="console-tabs">
-                        <button class="console-tab active" data-console="testcase">
-                            <span>Testcase</span>
-                        </button>
-                        <button class="console-tab" data-console="result">
-                            <span>Test Result</span>
-                        </button>
-                    </div>
-
-                    <div class="console-content">
-                        <div id="testcase-panel" class="console-panel active">
-                            <div class="testcase-input">
-                                <label>Case <span id="current-case">1</span></label>
-                                <div id="testcase-display" class="testcase-display">
-                                    <div class="testcase-item">🤔 Hit 'Run' to see what breaks! </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="result-panel" class="console-panel">
-                            <div id="results-body" class="results-display">
-                                <div class="empty-state">
-                                    <p>🎮 Run your code and pray 🙏</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="action-bar">
-                    <div class="action-left">
-                        <button id="run-tests-btn" class="btn btn-run">
-                            <span>▶</span>
-                            <span>Run</span>
-                        </button>
-                        <button id="submit-solution-btn" class="btn btn-submit">
-                            <span>Submit</span>
-                        </button>
-                    </div>
-                    <div class="action-right">
-                        <button id="hint-btn" class="btn btn-hint-action">💡 Hint</button>
-                        <button id="skip-challenge-btn" class="btn btn-skip">Skip</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Game Over Modal -->
-    <div id="game-over-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <h2 id="game-over-title">🎉 GG! You're Built Different!</h2>
-            <div class="final-stats">
-                <div class="stat-row">
-                    <span>Final Score:</span>
-                    <strong id="final-score">0</strong>
-                </div>
-                <div class="stat-row">
-                    <span>Bugs Squashed:</span>
-                    <strong id="final-bugs">0</strong>
-                </div>
-                <div class="stat-row">
-                    <span>Best Streak:</span>
-                    <strong id="final-streak">0</strong>
-                </div>
-                <div class="stat-row">
-                    <span>Accuracy:</span>
-                    <strong id="final-accuracy">0%</strong>
-                </div>
-                <div class="stat-row">
-                    <span>Total Time:</span>
-                    <strong id="final-time">0:00</strong>
-                </div>
-            </div>
-            <div class="modal-actions">
-                <button id="play-again-btn" class="btn btn-primary">🔄 Run It Back</button>
-                <button id="view-stats-btn" class="btn btn-secondary">📊 Check Stats</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Next Challenge Transition -->
-    <div id="next-challenge-modal" class="modal" style="display: none;">
-        <div class="modal-content transition-modal">
-            <div class="transition-icon" id="transition-icon">✅</div>
-            <h3 id="transition-title">Correct!</h3>
-            <p id="transition-message">Great job fixing the bug!</p>
-            <div class="transition-stats">
-                <span>+<span id="points-earned">75</span> points</span>
-                <span>Time: <span id="time-taken">00:45</span></span>
-            </div>
-            <button id="next-challenge-btn" class="btn btn-primary">Next Challenge →</button>
-        </div>
-    </div>
-
-    <script src="game.js"></script>
+document.addEventListener('DOMContentLoaded', () => {
+    new BugBustersGame();
+});
+    </script>
 </body>
 </html>
